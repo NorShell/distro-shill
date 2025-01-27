@@ -15,8 +15,8 @@ export const Pick: FC<Props> = (props: Props) => {
     <div className="box-border w-full h-full flex flex-col items-center justify-center gap-10" >
       <h1 className="text-xl" >Shill</h1>
       <div className="flex gap-10 w-full justify-center" >
-        <Distro choice={props.choiceOne} />
-        <Distro choice={props.choiceTwo} />
+        <Distro link={`/pick/${props.choiceOne}/${props.choiceTwo}`} choice={props.choiceOne} />
+        <Distro link={`/pick/${props.choiceTwo}/${props.choiceOne}`} choice={props.choiceTwo} />
       </div>
     </div>
   </Layout>

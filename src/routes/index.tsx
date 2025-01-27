@@ -23,11 +23,21 @@ function getRandomDistro() {
 export const ui = new Hono<{ Bindings: CloudflareBindings }>()
 
 ui.get('/', (c) => {
+
   const books = ['Wizard of Oz', 'Dune', 'Why kill me']
   return c.html(<Main books={books} ></Main>)
 })
 
-ui.get('/pick', (c) => {
+ui.get('/pick/:selectedId?/:refusedId?', (c) => {
+
+  const { selectedId, refusedId } = c.req.param()
+
+  if (selectedId && refusedId) {
+    console.log({
+      selectedId,
+      refusedId
+    })
+  }
 
   const choiceOne = getRandomDistro()
   const choiceTwo = getRandomDistro()

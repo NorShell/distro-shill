@@ -5,12 +5,13 @@ import { FC } from "hono/jsx";
 
 interface Props {
   choice: string,
+  link: string
 }
 
 export const Distro: FC<Props> = (props: Props) => {
   return <a
-    href="/pick"
-    className="w-1/4 text-center p-10 text-2xl border border-zinc-700 border-dashed rounded-lg "
+    href={props.link}
+    className="w-1/4 text-center p-10 text-2xl border border-zinc-700 border-dashed "
   >
     <img
       className="w-[400px] h-[400px]"

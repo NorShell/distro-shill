@@ -3,7 +3,12 @@ main = "src/index.ts"
 compatibility_date = "2025-01-26"
 
 assets = { directory = "public" }
-# compatibility_flags = [ "nodejs_compat" ]
+compatibility_flags = ["nodejs_compat"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "Distro"
+database_id = "e8a24658-7ffe-45bb-a5dd-7728f0188c90"
 
 # [vars]
 # MY_VAR = "my-variable"
@@ -16,10 +21,6 @@ assets = { directory = "public" }
 # binding = "MY_BUCKET"
 # bucket_name = "my-bucket"
 
-# [[d1_databases]]
-# binding = "DB"
-# database_name = "my-database"
-# database_id = ""
 
 # [ai]
 # binding = "AI"
@@ -27,4 +28,3 @@ assets = { directory = "public" }
 # [observability]
 # enabled = true
 # head_sampling_rate = 1
-

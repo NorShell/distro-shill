@@ -1,0 +1,9 @@
+CREATE TABLE DISTRO (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    photo_url TEXT NOT NULL,
+    upvotes INTEGER DEFAULT 0,
+    downvotes INTEGER DEFAULT 0,
+    score INTEGER DEFAULT 0
+);
+
