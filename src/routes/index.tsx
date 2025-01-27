@@ -2,32 +2,21 @@
 /** @jsxImportSource hono/jsx */
 
 import { Hono } from "hono";
-import { FC } from "hono/jsx";
+import { Main } from "../ui";
+import { LeaderBoard } from "../ui/leaderboard";
+import { Pick } from "../ui/pick";
 
-export const books = new Hono<{ Bindings: CloudflareBindings }>()
+export const ui = new Hono<{ Bindings: CloudflareBindings }>()
 
-const Layout: FC = (props) => {
-  return <html>
-    <body>{props.children}</body>
-  </html>
-}
-
-const Top: FC<{ books: string[] }> = (props: {
-  books: string[]
-}) => {
-  return (
-    <Layout>
-      <h1>Hello Hono!</h1>
-      <ul>
-        {props.books.map((book) => {
-          return <li>{book}!!</li>
-        })}
-      </ul>
-    </Layout>
-  )
-}
-
-books.get('/', (c) => {
+ui.get('/', (c) => {
   const books = ['Wizard of Oz', 'Dune', 'Why kill me']
-  return c.html(<Top books={books} ></Top>)
+  return c.html(<Main books={books} ></Main>)
+})
+
+ui.get('/pick', (c) => {
+  return c.html(<Pick />)
+})
+
+ui.get("/leaderboard", (c) => {
+  return c.html(<LeaderBoard />)
 })
