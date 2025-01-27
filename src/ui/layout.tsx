@@ -3,6 +3,7 @@
 
 import { FC } from "hono/jsx";
 import { Navbar } from "./components/NavBar";
+import { Footer } from "./components/Footer";
 
 export const Layout: FC = (props) => {
   return <html lang="en">
@@ -24,6 +25,7 @@ export const Layout: FC = (props) => {
     <body className="bg-zinc-950 text-zinc-50 h-screen flex flex-col justify-between items-center " >
       <Navbar />
       {props.children}
+      <Footer />
     </body>
   </html>
 }

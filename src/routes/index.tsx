@@ -5,46 +5,35 @@ import { Hono } from "hono";
 import { Main } from "../ui";
 import { LeaderBoard } from "../ui/leaderboard";
 import { Pick } from "../ui/pick";
-
-const distros = [
-  "Arch", "Tails", "PopOs", "Debian", "CentOS", "NixOS", "Alpine", "Fedora", "RedHat"
-]
-
-function getRandomDistro() {
-
-  const distroNumber = distros.length
-
-  const chosenDistro = distros[Math.floor(Math.random() * distroNumber)]
-
-  return chosenDistro
-
-}
+import { SelectDistro } from "../models";
+import { decrement, getAllDistros, getTwoRandomDistros, increment } from "../db/queries";
 
 export const ui = new Hono<{ Bindings: CloudflareBindings }>()
 
 ui.get('/', (c) => {
 
-  const books = ['Wizard of Oz', 'Dune', 'Why kill me']
-  return c.html(<Main books={books} ></Main>)
+  return c.html(<Main></Main>)
 })
 
-ui.get('/pick/:selectedId?/:refusedId?', (c) => {
+ui.get('/pick/:selectedId?/:refusedId?', async (c) => {
 
   const { selectedId, refusedId } = c.req.param()
 
   if (selectedId && refusedId) {
-    console.log({
-      selectedId,
-      refusedId
-    })
+    await increment(c.env.DB, selectedId)
+    await decrement(c.env.DB, refusedId)
   }
 
-  const choiceOne = getRandomDistro()
-  const choiceTwo = getRandomDistro()
+  const results = await getTwoRandomDistros(c.env.DB)
 
-  return c.html(<Pick choiceOne={choiceOne} choiceTwo={choiceTwo} />)
+  const [distroOne, distroTwo] = results
+
+  return c.html(<Pick distroOne={distroOne} distroTwo={distroTwo} />)
 })
 
-ui.get("/leaderboard", (c) => {
-  return c.html(<LeaderBoard />)
+ui.get("/leaderboard", async (c) => {
+
+  const results = await getAllDistros(c.env.DB)
+
+  return c.html(<LeaderBoard distros={results} />)
 })

@@ -2,20 +2,21 @@
 /** @jsxImportSource hono/jsx */
 
 import { FC } from "hono/jsx";
+import { SelectDistro } from "../../models";
 
 interface Props {
-  choice: string,
+  distro: SelectDistro
   link: string
 }
 
 export const Distro: FC<Props> = (props: Props) => {
   return <a
     href={props.link}
-    className="w-1/4 text-center p-10 text-2xl border border-zinc-700 border-dashed "
+    className="text-center p-5 lg:p-10 text-2xl lg:text-5xl border-4 border-zinc-700 border-dashed flex flex-col items-center justify-center gap-5 lg:gap-10 "
   >
     <img
-      className="w-[400px] h-[400px]"
-      src="https://banner2.cleanpng.com/20180810/wo/8743498d46f78c192fc2affa5b865c99.webp" />
-    <span>{props.choice}</span>
+      className="w-[150px] h-[150px] lg:w-[400px] lg:h-[400px]"
+      src={props.distro.photo_url} />
+    <span>{props.distro.name}</span>
   </a>
 }

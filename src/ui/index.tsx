@@ -4,18 +4,19 @@
 import { FC } from "hono/jsx";
 import { Layout } from "./layout";
 
-export const Main: FC<{ books: string[] }> = (props: {
-  books: string[]
-}) => {
+export const Main: FC = () => {
   return (
     <Layout>
-      <h1>Hello Hono!</h1>
-      <ul>
-        {props.books.map((book) => {
-          return <li>{book}!!</li>
-        })}
-      </ul>
-      <a href="/pick">Start</a>
+      <div className=" box-border px-5 flex flex-col items-center justify-center gap-10" >
+        <h1 className="text-center text-xl" >Shill your favourite Linux distribution</h1>
+        <a className="
+          text-2xl p-5 border-dashed border-4 border-zinc-700 
+          hover:border-zinc-100
+          transform transition duration-300
+          "
+          href="/pick"
+        >Shill</a>
+      </div>
     </Layout>
   )
 }
