@@ -15,6 +15,7 @@ export const Main: FC<{ books: string[] }> = (props: {
           return <li>{book}!!</li>
         })}
       </ul>
+      <a href="/pick">Start</a>
     </Layout>
   )
 }
