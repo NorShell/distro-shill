@@ -3,10 +3,21 @@
 
 import { FC } from "hono/jsx";
 import { Layout } from "./layout";
+import { Distro } from "./components/Distro";
 
-export const Pick: FC = (props) => {
+interface Props {
+  choiceOne: string,
+  choiceTwo: string
+}
+
+export const Pick: FC<Props> = (props: Props) => {
   return <Layout>
-    <h1>Hello from pick a distro</h1>
-    <a href="/pick" >Pick another</a>
+    <div className="box-border w-full h-full flex flex-col items-center justify-center gap-10" >
+      <h1 className="text-xl" >Shill</h1>
+      <div className="flex gap-10 w-full justify-center" >
+        <Distro choice={props.choiceOne} />
+        <Distro choice={props.choiceTwo} />
+      </div>
+    </div>
   </Layout>
 }

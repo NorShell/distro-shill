@@ -2,6 +2,7 @@ name = "distro-shill"
 main = "src/index.ts"
 compatibility_date = "2025-01-26"
 
+assets = { directory = "public" }
 # compatibility_flags = [ "nodejs_compat" ]
 
 # [vars]
@@ -26,3 +27,4 @@ compatibility_date = "2025-01-26"
 # [observability]
 # enabled = true
 # head_sampling_rate = 1
+

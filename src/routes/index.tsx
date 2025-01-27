@@ -6,6 +6,20 @@ import { Main } from "../ui";
 import { LeaderBoard } from "../ui/leaderboard";
 import { Pick } from "../ui/pick";
 
+const distros = [
+  "Arch", "Tails", "PopOs", "Debian", "CentOS", "NixOS", "Alpine", "Fedora", "RedHat"
+]
+
+function getRandomDistro() {
+
+  const distroNumber = distros.length
+
+  const chosenDistro = distros[Math.floor(Math.random() * distroNumber)]
+
+  return chosenDistro
+
+}
+
 export const ui = new Hono<{ Bindings: CloudflareBindings }>()
 
 ui.get('/', (c) => {
@@ -14,7 +28,11 @@ ui.get('/', (c) => {
 })
 
 ui.get('/pick', (c) => {
-  return c.html(<Pick />)
+
+  const choiceOne = getRandomDistro()
+  const choiceTwo = getRandomDistro()
+
+  return c.html(<Pick choiceOne={choiceOne} choiceTwo={choiceTwo} />)
 })
 
 ui.get("/leaderboard", (c) => {
