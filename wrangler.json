@@ -4,7 +4,7 @@
   "main": "src/index.ts",
   "compatibility_date": "2025-01-24",
   "observability": {
-    "enabled": true
+    "enabled": false
   },
   "assets": {
     "directory": "./public/",
@@ -15,6 +15,12 @@
       "binding": "DB",
       "database_name": "Distro",
       "database_id": "e8a24658-7ffe-45bb-a5dd-7728f0188c90"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "BUCKET",
+      "bucket_name": "distros"
     }
   ]
 }

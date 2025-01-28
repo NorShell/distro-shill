@@ -24,6 +24,8 @@ ui.get('/pick/:selectedId?/:refusedId?', async (c) => {
     await decrement(c.env.DB, refusedId)
   }
 
+  const url = await c.env.BUCKET.get("arch.png")
+
   const results = await getTwoRandomDistros(c.env.DB)
 
   const [distroOne, distroTwo] = results
