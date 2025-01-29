@@ -22,5 +22,11 @@
       "binding": "BUCKET",
       "bucket_name": "distros"
     }
+  ],
+  "routes": [
+    {
+      "pattern": "shill-it.today",
+      "custom_domain": true
+    }
   ]
 }

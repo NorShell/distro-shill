@@ -41,3 +41,29 @@ export async function decrement(db: D1Database, distroId: string) {
   WHERE id = ?;
 `).bind(distroId).run();
 }
+
+export async function getTwoDistros(db: D1Database) {
+
+  const queryResult = await db.prepare(`
+  SELECT * 
+  FROM DISTRO
+  ORDER BY score DESC
+`).all<SelectDistro>()
+
+  const distros = queryResult.results
+
+  const randomIdx = Math.floor(Math.random() * distros.length);
+  const startIdx = Math.max(randomIdx - 2, 0);
+  const endIdx = Math.min(randomIdx + 2, distros.length - 1);
+  const range = distros.slice(startIdx, endIdx + 1);
+
+  const selectedDistros: SelectDistro[] = [];
+  while (selectedDistros.length < 2) {
+    const randomDistro = range[Math.floor(Math.random() * range.length)];
+    if (selectedDistros.indexOf(randomDistro) === -1)
+      selectedDistros.push(randomDistro);
+  }
+
+  return selectedDistros;
+
+}

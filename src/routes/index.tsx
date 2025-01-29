@@ -6,7 +6,7 @@ import { Main } from "../ui";
 import { LeaderBoard } from "../ui/leaderboard";
 import { Pick } from "../ui/pick";
 import { SelectDistro } from "../models";
-import { decrement, getAllDistros, getTwoRandomDistros, increment } from "../db/queries";
+import { decrement, getAllDistros, getTwoDistros, getTwoRandomDistros, increment } from "../db/queries";
 
 export const ui = new Hono<{ Bindings: CloudflareBindings }>()
 
@@ -26,7 +26,8 @@ ui.get('/pick/:selectedId?/:refusedId?', async (c) => {
 
   const url = await c.env.BUCKET.get("arch.png")
 
-  const results = await getTwoRandomDistros(c.env.DB)
+  // const results = await getTwoRandomDistros(c.env.DB)
+  const results = await getTwoDistros(c.env.DB)
 
   const [distroOne, distroTwo] = results
 
