@@ -9,6 +9,7 @@ interface Props {
   distros: SelectDistro[]
 }
 
+
 export const LeaderBoard: FC<Props> = (props: Props) => {
   return <Layout>
     <div className="w-full flex flex-col items-start justify-center mb-5 box-border px-10" >
@@ -22,13 +23,24 @@ export const LeaderBoard: FC<Props> = (props: Props) => {
         <span className="text-center" >Overall Score</span>
       </span>
       {props.distros.map((distro, index) => {
-        return <span className="box-border gap-5 w-full grid grid-cols-3 lg:grid-cols-5 text-sm lg:text-md p-2">
-          <span>{index + 1}.</span>
-          <span>{distro.name}</span>
-          <span className="hidden lg:inline text-green-200 text-center" >{distro.upvotes}</span>
-          <span className="hidden lg:inline  text-red-200 text-center">{distro.downvotes}</span>
-          <span className="text-center">{distro.score}</span>
-        </span>
+
+        const textColor = index === 0
+          ? "text-yellow-400 font-bold text-md lg:text-lg "
+          : index === 1
+            ? "text-gray-500 font-bold text-md lg:text-lg"
+            : index === 2
+              ? "text-amber-700 font-bold text-md lg:text-lg"
+              : "";
+
+        return (
+          <span className="box-border gap-5 w-full grid grid-cols-3 lg:grid-cols-5 text-sm lg:text-md p-2">
+            <span>{index + 1}.</span>
+            <span className={`${textColor}`} >{distro.name}</span>
+            <span className="hidden lg:inline text-green-200 text-center" >{distro.upvotes}</span>
+            <span className="hidden lg:inline  text-red-200 text-center">{distro.downvotes}</span>
+            <span className="text-center">{distro.score}</span>
+          </span>
+        )
       })}
     </div>
   </Layout>
