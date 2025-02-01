@@ -1,4 +1,4 @@
-import { SelectDistro } from "../models";
+import { SelectDistro, SelectRequestedDistro } from "../models";
 
 export async function getTwoRandomDistros(db: D1Database) {
   const { results } = await db.prepare(`
@@ -65,5 +65,26 @@ export async function getTwoDistros(db: D1Database) {
   }
 
   return selectedDistros;
+
+}
+
+export async function getRequestedDistros(db: D1Database) {
+
+  const { results } = await db.prepare(`
+  SELECT *
+  FROM requested_distros
+  ORDER BY id desc
+  `)
+    .all<SelectRequestedDistro>()
+
+  return results
+
+}
+
+export async function createRequestedDisto(db: D1Database, name: string) {
+
+  await db.prepare("INSERT INTO requested_distros (name) VALUES (?)")
+    .bind(name)
+    .run();
 
 }

@@ -9,7 +9,6 @@ interface Props {
   distros: SelectDistro[]
 }
 
-
 export const LeaderBoard: FC<Props> = (props: Props) => {
   return <Layout>
     <div className="w-full flex flex-col items-start justify-center mb-5 box-border px-10" >

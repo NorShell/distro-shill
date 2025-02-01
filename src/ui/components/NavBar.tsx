@@ -17,6 +17,6 @@ export const Navbar: FC<Props> = (props: Props) => {
     </a>
     <a href="/pick">Shill</a>
     <a href="/leaderboard">Leaderboard</a>
-    <a href="https://github.com/NorShell/distro-shill" target="_blank">Github</a>
+    <a href="/request-distro">Add a distro</a>
   </nav>
 }
