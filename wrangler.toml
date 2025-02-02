@@ -1,5 +1,5 @@
 name = "distro-shill"
-main = "src/index.ts"
+main = "src/index.tsx"
 compatibility_date = "2025-01-26"
 
 assets = { directory = "public" }

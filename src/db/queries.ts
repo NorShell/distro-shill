@@ -72,7 +72,7 @@ export async function getRequestedDistros(db: D1Database) {
 
   const { results } = await db.prepare(`
   SELECT *
-  FROM requested_distros
+  FROM RequestedDistros
   ORDER BY id desc
   `)
     .all<SelectRequestedDistro>()
@@ -83,7 +83,7 @@ export async function getRequestedDistros(db: D1Database) {
 
 export async function createRequestedDisto(db: D1Database, name: string) {
 
-  await db.prepare("INSERT INTO requested_distros (name) VALUES (?)")
+  await db.prepare("INSERT INTO RequestedDistros (name) VALUES (?)")
     .bind(name)
     .run();
 

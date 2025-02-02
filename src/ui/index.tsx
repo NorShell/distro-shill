@@ -12,7 +12,7 @@ export const Main: FC = () => {
         <p className="text-center text-zinc-400" >You get two distros, choose your favourite from the two. Check the <a href="/leaderboard" >leaderboard</a> to see the stats. </p>
         <a className="
           text-2xl p-5 border-dashed border-4 border-zinc-700 
-          hover:border-zinc-100
+          hover:border-zinc-100 animate-pulse
           transform transition duration-300
           "
           href="/pick"

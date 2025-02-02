@@ -11,6 +11,7 @@ import { RequestDistro } from "../ui/RequestDistro";
 import { Confirmation } from "../ui/Confirmation";
 import { SelectDistro, SelectRequestedDistro } from "../models";
 import { ErrorComponent } from "../ui/components/ErrorComponent";
+import { NotFoundComponent } from "../ui/components/NotFound";
 
 export const ui = new Hono<{ Bindings: CloudflareBindings }>()
 
@@ -20,6 +21,8 @@ ui.get('/', (c) => {
 })
 
 ui.get('/pick/:selectedId?/:refusedId?', async (c) => {
+
+  await new Promise(resolve => setTimeout(resolve, 1000))
 
   const { selectedId, refusedId } = c.req.param()
 
@@ -101,3 +104,6 @@ ui.post("/request-distro", async (c) => {
 
 })
 
+ui.notFound((c) => {
+  return c.html(<NotFoundComponent />)
+})

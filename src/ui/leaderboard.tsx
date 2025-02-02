@@ -24,11 +24,11 @@ export const LeaderBoard: FC<Props> = (props: Props) => {
       {props.distros.map((distro, index) => {
 
         const textColor = index === 0
-          ? "text-yellow-400 font-bold text-md lg:text-lg "
+          ? "text-yellow-400 animate-pulse font-bold text-md lg:text-lg "
           : index === 1
-            ? "text-gray-500 font-bold text-md lg:text-lg"
+            ? "text-gray-500 animate-pulse font-bold text-md lg:text-lg"
             : index === 2
-              ? "text-amber-700 font-bold text-md lg:text-lg"
+              ? "text-amber-700 animate-pulse font-bold text-md lg:text-lg"
               : "";
 
         return (

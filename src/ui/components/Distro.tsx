@@ -11,7 +11,10 @@ interface Props {
 
 export const Distro: FC<Props> = (props: Props) => {
   return <button
-    hx-get={props.link} hx-target="#content" hx-swap="outerHTML"
+    hx-get={props.link}
+    hx-target="#distros"
+    hx-swap="outerHTML"
+    data-loading-class="hidden"
     className="text-center p-5 lg:p-10 text-2xl lg:text-5xl border-4 
     border-zinc-700 hover:border-green-900 border-dashed flex flex-col items-center justify-center gap-5 lg:gap-10 "
   >

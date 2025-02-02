@@ -1,5 +1,5 @@
-CREATE TABLE requested_distros (
-    id SERIAL PRIMARY KEY, 
+CREATE TABLE RequestedDistros (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(255) NOT NULL UNIQUE, 
     status VARCHAR(20) NOT NULL DEFAULT 'pending'
 );
