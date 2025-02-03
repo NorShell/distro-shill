@@ -17,12 +17,6 @@
       "database_id": "e8a24658-7ffe-45bb-a5dd-7728f0188c90"
     }
   ],
-  "r2_buckets": [
-    {
-      "binding": "BUCKET",
-      "bucket_name": "distros"
-    }
-  ],
   "routes": [
     {
       "pattern": "shill-it.today",

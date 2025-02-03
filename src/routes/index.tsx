@@ -20,11 +20,9 @@ ui.get('/', (c) => {
   return c.html(<Main></Main>)
 })
 
-ui.get('/pick/:selectedId?/:refusedId?', async (c) => {
+ui.get('/pick/:selectedId?/:refusedId?/:downvoteBoth?', async (c) => {
 
-  await new Promise(resolve => setTimeout(resolve, 1000))
-
-  const { selectedId, refusedId } = c.req.param()
+  const { selectedId, refusedId, downvoteBoth } = c.req.param()
 
   let results: SelectDistro[] = []
 
@@ -35,6 +33,16 @@ ui.get('/pick/:selectedId?/:refusedId?', async (c) => {
   }
 
   const [distroOne, distroTwo] = results
+
+  if (selectedId && refusedId && downvoteBoth) {
+    try {
+      await decrement(c.env.DB, selectedId)
+      await decrement(c.env.DB, refusedId)
+      return c.html(<Pick distroOne={distroOne} distroTwo={distroTwo} />)
+    } catch (error) {
+      return c.html(<ErrorComponent message="Come on man just chose one!" />)
+    }
+  }
 
   if (selectedId && refusedId) {
     try {

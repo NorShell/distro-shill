@@ -4,6 +4,9 @@ body {
   font-style: normal;
 }
 
-[data-loading] {
+.htmx-indicator {
   display: none;
+}
+.htmx-request .htmx-indicator {
+  display: flex;
 }
