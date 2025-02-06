@@ -20,7 +20,7 @@ export const Distro: FC<Props> = (props: Props) => {
   >
     <img
       className="w-[150px] h-[150px] lg:w-[400px] lg:h-[400px]"
-      src={props.distro.photo_url} />
+      src={`/static/logos/${props.distro.id}.webp`} />
     <span>{props.distro.name}</span>
   </button>
 }

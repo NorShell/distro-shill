@@ -86,17 +86,15 @@ ui.get('/pick/:selectedId?/:refusedId?/:downvoteBoth?', async (c) => {
 
       await updateSession(c, session)
 
+      remainingDistros = remainingDistros.filter(d => !session.ratedDistros.includes(d.id))
 
       if (remainingDistros.length === 0) {
         await deleteSession(c, session)
         return c.text("Finished")
       }
 
-      remainingDistros = remainingDistros.filter(d => !session.ratedDistros.includes(d.id))
-
       const [distroOne, distroTwo] = remainingDistros
 
-      console.log("_____________________________________________________________________________________________________________\n")
 
       return c.html(<Pick totalNumbers={results.length} ratedNumbers={results.length - remainingDistros.length} distroOne={distroOne} distroTwo={distroTwo} />)
 
@@ -119,17 +117,14 @@ ui.get('/pick/:selectedId?/:refusedId?/:downvoteBoth?', async (c) => {
 
       await updateSession(c, session)
 
+      remainingDistros = remainingDistros.filter(d => !session.ratedDistros.includes(d.id))
 
       if (remainingDistros.length === 0) {
         await deleteSession(c, session)
         return c.text("Finished")
       }
 
-      remainingDistros = remainingDistros.filter(d => !session.ratedDistros.includes(d.id))
-
       const [distroOne, distroTwo] = remainingDistros
-
-      console.log("_____________________________________________________________________________________________________________\n")
 
       return c.html(<Pick totalNumbers={results.length} ratedNumbers={results.length - remainingDistros.length} distroOne={distroOne} distroTwo={distroTwo} />)
 

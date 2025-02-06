@@ -10,12 +10,10 @@ export interface Session {
 
 export async function getSession(c: Context<{ Bindings: CloudflareBindings }, "/", BlankInput>) {
 
-
   const sessionCookey = getCookie(c, "sessionId")
   let session: Session | undefined
 
   if (sessionCookey) {
-
 
     const sessionData = await c.env.DistroKV.get(sessionCookey)
     if (sessionData) {

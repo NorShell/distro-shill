@@ -5,6 +5,7 @@ export interface SelectDistro {
   upvotes: number
   downvotes: number
   score: number
+  local_photo_url: string
 }
 
 export interface InsertDistro {

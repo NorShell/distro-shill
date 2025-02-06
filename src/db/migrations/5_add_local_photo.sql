@@ -1,0 +1,2 @@
+ALTER TABLE DISTRO
+ADD COLUMN local_photo_url TEXT;
