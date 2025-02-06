@@ -6,6 +6,7 @@ export interface Session {
   sessionId: string
   ratedDistros: number[]
   createdAt: number
+  screwBothNumber: number
 }
 
 export async function getSession(c: Context<{ Bindings: CloudflareBindings }, "/", BlankInput>) {
@@ -33,7 +34,8 @@ export async function getSession(c: Context<{ Bindings: CloudflareBindings }, "/
     session = {
       sessionId,
       ratedDistros: [],
-      createdAt: Date.now()
+      createdAt: Date.now(),
+      screwBothNumber: 3
     }
 
     const sessionString = JSON.stringify(session)

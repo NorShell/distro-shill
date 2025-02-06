@@ -13,6 +13,7 @@ import { SelectDistro, SelectRequestedDistro } from "../models";
 import { ErrorComponent } from "../ui/components/ErrorComponent";
 import { NotFoundComponent } from "../ui/components/NotFound";
 import { Session, deleteSession, getSession, updateSession } from "../utils/session";
+import { Finished } from "../ui/Finished";
 
 export const ui = new Hono<{ Bindings: CloudflareBindings }>()
 
@@ -58,6 +59,7 @@ ui.get('/pick/:selectedId?/:refusedId?/:downvoteBoth?', async (c) => {
     return c.html(<ErrorComponent message="The DB is out of space and maybe we should have read those emails" />)
   }
 
+  //
   const ratedDistros = session.ratedDistros
 
   console.log(ratedDistros)
@@ -73,6 +75,7 @@ ui.get('/pick/:selectedId?/:refusedId?/:downvoteBoth?', async (c) => {
   }
 
   const [distroOne, distroTwo] = remainingDistros
+  //
 
   if (selectedId && refusedId && downvoteBoth) {
 
@@ -84,19 +87,23 @@ ui.get('/pick/:selectedId?/:refusedId?/:downvoteBoth?', async (c) => {
       session.ratedDistros.push(parseInt(selectedId))
       session.ratedDistros.push(parseInt(refusedId))
 
+      if (session.screwBothNumber > 0) {
+        session.screwBothNumber = session.screwBothNumber - 1
+      }
+
       await updateSession(c, session)
 
       remainingDistros = remainingDistros.filter(d => !session.ratedDistros.includes(d.id))
 
       if (remainingDistros.length === 0) {
         await deleteSession(c, session)
-        return c.text("Finished")
+        return c.html(<Finished />)
       }
 
       const [distroOne, distroTwo] = remainingDistros
 
 
-      return c.html(<Pick totalNumbers={results.length} ratedNumbers={results.length - remainingDistros.length} distroOne={distroOne} distroTwo={distroTwo} />)
+      return c.html(<Pick screwBothNumber={session.screwBothNumber} totalNumbers={results.length} ratedNumbers={results.length - remainingDistros.length} distroOne={distroOne} distroTwo={distroTwo} />)
 
     } catch (error) {
 
@@ -121,12 +128,17 @@ ui.get('/pick/:selectedId?/:refusedId?/:downvoteBoth?', async (c) => {
 
       if (remainingDistros.length === 0) {
         await deleteSession(c, session)
-        return c.text("Finished")
+        return c.html(<Finished />)
       }
 
       const [distroOne, distroTwo] = remainingDistros
 
-      return c.html(<Pick totalNumbers={results.length} ratedNumbers={results.length - remainingDistros.length} distroOne={distroOne} distroTwo={distroTwo} />)
+      return c.html(<Pick
+        screwBothNumber={session.screwBothNumber}
+        totalNumbers={results.length}
+        ratedNumbers={results.length - remainingDistros.length}
+        distroOne={distroOne}
+        distroTwo={distroTwo} />)
 
     } catch (error) {
 
@@ -137,7 +149,11 @@ ui.get('/pick/:selectedId?/:refusedId?/:downvoteBoth?', async (c) => {
   }
 
   return c.html(<Layout>
-    <Pick totalNumbers={results.length} ratedNumbers={results.length - remainingDistros.length} distroOne={distroOne} distroTwo={distroTwo} />
+    <Pick
+      screwBothNumber={session.screwBothNumber}
+      totalNumbers={results.length}
+      ratedNumbers={results.length - remainingDistros.length}
+      distroOne={distroOne} distroTwo={distroTwo} />
   </Layout>
   )
 })
