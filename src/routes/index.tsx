@@ -13,7 +13,6 @@ import { SelectDistro, SelectRequestedDistro } from "../models";
 import { ErrorComponent } from "../ui/components/ErrorComponent";
 import { NotFoundComponent } from "../ui/components/NotFound";
 import { Session, deleteSession, getSession, updateSession } from "../utils/session";
-import { getCookie } from "hono/cookie";
 
 export const ui = new Hono<{ Bindings: CloudflareBindings }>()
 
@@ -40,7 +39,6 @@ ui.get('/pick/:selectedId?/:refusedId?/:downvoteBoth?', async (c) => {
     if (!session) {
       throw new Error()
     }
-
 
   } catch (error) {
 
@@ -94,6 +92,10 @@ ui.get('/pick/:selectedId?/:refusedId?/:downvoteBoth?', async (c) => {
         return c.text("Finished")
       }
 
+      remainingDistros = remainingDistros.filter(d => !session.ratedDistros.includes(d.id))
+
+      const [distroOne, distroTwo] = remainingDistros
+
       console.log("_____________________________________________________________________________________________________________\n")
 
       return c.html(<Pick totalNumbers={results.length} ratedNumbers={results.length - remainingDistros.length} distroOne={distroOne} distroTwo={distroTwo} />)
@@ -106,7 +108,6 @@ ui.get('/pick/:selectedId?/:refusedId?/:downvoteBoth?', async (c) => {
   }
 
   if (selectedId && refusedId) {
-
 
     try {
 
@@ -124,6 +125,10 @@ ui.get('/pick/:selectedId?/:refusedId?/:downvoteBoth?', async (c) => {
         return c.text("Finished")
       }
 
+      remainingDistros = remainingDistros.filter(d => !session.ratedDistros.includes(d.id))
+
+      const [distroOne, distroTwo] = remainingDistros
+
       console.log("_____________________________________________________________________________________________________________\n")
 
       return c.html(<Pick totalNumbers={results.length} ratedNumbers={results.length - remainingDistros.length} distroOne={distroOne} distroTwo={distroTwo} />)
@@ -135,7 +140,6 @@ ui.get('/pick/:selectedId?/:refusedId?/:downvoteBoth?', async (c) => {
 
     }
   }
-
 
   return c.html(<Layout>
     <Pick totalNumbers={results.length} ratedNumbers={results.length - remainingDistros.length} distroOne={distroOne} distroTwo={distroTwo} />
