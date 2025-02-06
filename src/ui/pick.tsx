@@ -1,13 +1,15 @@
 /** @jsx jsx */
 /** @jsxImportSource hono/jsx */
 
-import { FC, Fragment } from "hono/jsx";
+import { FC } from "hono/jsx";
 import { Distro } from "./components/Distro";
 import { SelectDistro } from "../models";
 
 interface Props {
   distroOne: SelectDistro,
   distroTwo: SelectDistro,
+  totalNumbers: number,
+  ratedNumbers: number
 }
 
 export const Pick: FC<Props> = (props: Props) => {
@@ -16,6 +18,7 @@ export const Pick: FC<Props> = (props: Props) => {
       id="distros"
       className="w-full flex flex-col items-center justify-center"
     >
+      <span className="text-zinc-200">Rated: {props.ratedNumbers}/{props.totalNumbers}</span>
       <div
         className="box-border pb-5 lg:pb-10 w-full h-full px-10 flex flex-col items-center lg:flex-row p-2 lg:gap-5 justify-center"
       >

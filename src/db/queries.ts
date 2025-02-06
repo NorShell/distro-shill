@@ -1,5 +1,6 @@
 import { SelectDistro, SelectRequestedDistro } from "../models";
 
+
 export async function getTwoRandomDistros(db: D1Database) {
   const { results } = await db.prepare(`
   SELECT * 
